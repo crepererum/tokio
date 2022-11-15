@@ -44,7 +44,9 @@ jobs:
             toolchain: ${{ env.rust_stable }}
             override: true
       - name: Vendor dependencies
-        run: cargo vendor vendor > .cargo/config.toml
+        run: |
+          rm -f .cargo/config*
+          cargo vendor vendor > .cargo/config.toml
       - uses: uraimo/run-on-arch-action@v2
         name: Run commands
         id: runcmd
