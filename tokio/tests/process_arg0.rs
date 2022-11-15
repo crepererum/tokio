@@ -5,7 +5,8 @@ use tokio::process::Command;
 
 #[tokio::test]
 async fn arg0() {
-    let mut cmd = Command::new("sh");
+    let sh = std::env::var("SHELL").unwrap_or("sh".to_string());
+    let mut cmd = Command::new(&sh);
     cmd.arg0("test_string").arg("-c").arg("echo $0");
 
     let output = cmd.output().await.unwrap();
