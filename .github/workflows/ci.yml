@@ -66,4 +66,4 @@ jobs:
             source $HOME/.cargo/env
             ls -la
             cd tokio
-            cargo test --all-features --tests
+            cargo test --all-features --tests --offline
