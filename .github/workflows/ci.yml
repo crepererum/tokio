@@ -49,10 +49,12 @@ jobs:
           # a GitHub package registry.
           githubToken: ${{ github.token }}
 
+          install: |
+            apt-get update -q -y
+            curl https://sh.rustup.rs -sSfy | sh
+
           # Set an output parameter `uname` for use in subsequent steps
           run: |
-            sudo apt upgrade
-            curl https://sh.rustup.rs -sSfy | sh
             source $HOME/.cargo/env
             ls -la
             cd tokio
