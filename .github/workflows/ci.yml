@@ -51,6 +51,7 @@ jobs:
 
           install: |
             apt-get update -q -y
+            apt-get install -q -y build-essential curl
             curl https://sh.rustup.rs -sSfy | sh
 
           # Set an output parameter `uname` for use in subsequent steps
