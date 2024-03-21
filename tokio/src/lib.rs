@@ -503,6 +503,11 @@ pub mod net;
 
 mod loom;
 
+cfg_rt! {
+    #[cfg(feature = "probe")]
+    mod probes;
+}
+
 cfg_process! {
     pub mod process;
 }

@@ -275,9 +275,14 @@ unsafe fn schedule<S: Schedule>(ptr: NonNull<Header>) {
     use crate::runtime::task::{Notified, Task};
 
     let scheduler = Header::get_scheduler::<S>(ptr);
+    let task = Task::from_raw(ptr.cast());
+
+    #[cfg(feature = "probe")]
+    crate::probes::task_schedule_start(task.id());
+
     scheduler
         .as_ref()
-        .schedule(Notified(Task::from_raw(ptr.cast())));
+        .schedule(Notified(task));
 }
 
 unsafe fn dealloc<T: Future, S: Schedule>(ptr: NonNull<Header>) {
